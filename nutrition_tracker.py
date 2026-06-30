@@ -3,7 +3,7 @@
 =============================================
 使い方:
   1. pip install streamlit pandas plotly openpyxl
-  2. 抽出結果.xlsx と同じフォルダに置く
+  2. 食品データ_改善版_1.xlsx と同じフォルダに置く
   3. streamlit run nutrition_tracker.py
 """
 
@@ -124,7 +124,7 @@ hr { border-color: #4a4a7a !important; }
 # ─────────────────────────────────────────
 @st.cache_data
 def load_food_data() -> pd.DataFrame:
-    df = pd.read_excel("抽出結果.xlsx")
+    df = pd.read_excel("食品データ_改善版_1.xlsx")
     df = df.iloc[11:].copy()
     df.columns = ["食品名", "カロリー(kcal)", "たんぱく質(g)", "シート名"]
     df["カロリー(kcal)"] = pd.to_numeric(df["カロリー(kcal)"], errors="coerce")
@@ -150,7 +150,7 @@ if "selected_date" not in st.session_state:
 try:
     food_df = load_food_data()
 except FileNotFoundError:
-    st.error("⚠️ 抽出結果.xlsx が見つかりません。同じフォルダに置いてください。")
+    st.error("⚠️ 食品データ_改善版_1.xlsx が見つかりません。同じフォルダに置いてください。")
     st.stop()
 
 
